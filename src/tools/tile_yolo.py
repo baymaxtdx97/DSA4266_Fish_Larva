@@ -93,7 +93,7 @@ def tiler(imnames, newpath, falsepath, slice_size, ext):
                 if not imsaved and falsepath:
                     sliced = imr[i*slice_size:(i+1)*slice_size, j*slice_size:(j+1)*slice_size]
                     sliced_im = Image.fromarray(sliced)
-                    filename = imname.split('/')[-1]
+                    filename = imname.replace('\\', '/').split('/')[-1]
                     slice_path = falsepath + "/" + filename.replace(ext, f'_{i}_{j}{ext}')                
 
                     sliced_im.save(slice_path)
@@ -145,7 +145,7 @@ if __name__ == "__main__":
     labnames = glob.glob(f'{args.source}/*.txt')
     
     if len(imnames) == 0:
-        raise Exception("Source folder should contain some images")
+        raise Exception("Source folder should confalstain some images")
     elif len(imnames) != len(labnames):
         raise Exception("Dataset should contain equal number of images and txt files with labels")
 

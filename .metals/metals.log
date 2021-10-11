@@ -2,3 +2,8 @@
 [0m2021.09.21 20:27:35 INFO  time: initialize in 0.93s[0m
 [0m2021.09.21 20:27:36 WARN  Build server is not auto-connectable.[0m
 [0m2021.09.21 20:27:36 WARN  no build tool detected in workspace 'C:\Users\Dell\Desktop\DSA4266_Fish_Larva'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. [0m
+[0m2021.10.11 22:52:30 INFO  Started: Metals version 0.10.7 in workspace 'C:\Users\Dell\Desktop\DSA4266_Fish_Larva' for client Visual Studio Code 1.60.1.[0m
+[0m2021.10.11 22:52:31 INFO  time: initialize in 0.88s[0m
+[0m2021.10.11 22:52:36 WARN  Build server is not auto-connectable.[0m
+[0m2021.10.11 22:52:36 WARN  no build tool detected in workspace 'C:\Users\Dell\Desktop\DSA4266_Fish_Larva'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. [0m
+[0m2021.10.12 00:03:48 INFO  shutting down Metals[0m

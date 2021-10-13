@@ -59,8 +59,7 @@ This scripts works in coordination with the output from tile_yolo.py. It will no
 ```
 
 ### image_count.py
-The purpose of this script is to get the overall counts of each class. This is created because images are sliced and the counts received
-from calling YOLOV3 detect.py is for each sliced image. 
+The purpose of this script is to get the overall counts of each class. This is created because images are sliced and the counts received from calling YOLOV3 detect.py is for each sliced image. 
 
 ```bash
 --image_labels_path     Directory path to data
@@ -69,13 +68,12 @@ from calling YOLOV3 detect.py is for each sliced image.
 ```
 
 ### manual_data_aug.py
-The purpose of this script is to get the data augmentation image and labels for the training dataset. This is created to increase the training
-dataset in hope to reduce overfitting. 
+The purpose of this script is to get the data augmentation image and labels for the training dataset. This is created to increase the training dataset in hopes to reduce overfitting. 
 
 ```bash
 --random_number         Random number from 1-3
---image_str             Image Label e.g. '20210729_131410_0_2.jpg'
---label_str             Label name e.g. '20210729_131410_0_2.txt'
+--image_str             Image Label e.g. 20210729_131410_0_2.jpg
+--label_str             Label name e.g. 20210729_131410_0_2.txt
 --img_folder_name       Directory path to obtain images 
 --lab_folder_name       Directory path to obtain labels
 --image_folder_save     Directory path to store new images
@@ -83,12 +81,11 @@ dataset in hope to reduce overfitting.
 ```
 
 ### masking_unwanted.py
-The purpose of this script is to get remove the sections of the image which the group labelled as 4 to be masked out. This is created so that
-these areas do not interfer in the training of the dataset.
+The purpose of this script is to get remove the sections of the image which the group labelled as 4 to be masked out. This is created so that these areas do not interfere with the training of the dataset.
 
 ```bash
---image_str             Image Label e.g. '20210729_131410_0_2.jpg'
---label_str             Label name e.g. '20210729_131410_0_2.txt'
+--image_str             Image Label e.g. 20210729_131410_0_2.jpg
+--label_str             Label name e.g. 20210729_131410_0_2.txt
 --img_folder_name       Directory path to obtain images 
 --lab_folder_name       Directory path to obtain labels
 --image_folder_save     Directory path to store new images

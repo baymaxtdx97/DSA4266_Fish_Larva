@@ -13,8 +13,7 @@ This project aims to help do small objection detection. The current model implem
     ├── tools
     │   ├── image_concate.py
     │   ├── image_count.py
-    │   ├── masking.py
-    │   ├── process_labels.py
+    │   ├── masking_unwanted.py
     │   ├── manual_data_aug.py
     │   └── tile_yolo.py  
     ├── yolosliced
@@ -82,3 +81,17 @@ dataset in hope to reduce overfitting.
 --image_folder_save     Directory path to store new images
 --lab_folder_save       Directory path to store new labels
 ```
+
+### masking_unwanted.py
+The purpose of this script is to get remove the sections of the image which the group labelled as 4 to be masked out. This is created so that
+these areas do not interfer in the training of the dataset.
+
+```bash
+--image_str             Image Label e.g. '20210729_131410_0_2.jpg'
+--label_str             Label name e.g. '20210729_131410_0_2.txt'
+--img_folder_name       Directory path to obtain images 
+--lab_folder_name       Directory path to obtain labels
+--image_folder_save     Directory path to store new images
+--lab_folder_save       Directory path to store new labels
+```
+

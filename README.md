@@ -5,13 +5,18 @@ This project aims to help do small objection detection. The current model implem
 ```bash
  src
     ├── data
+    │   ├── After_aug_V1
+    │   ├── After_split_V2
+    │   ├── Full_image_V1
+    │   └── classes.txt
     ├── image_tools.sh
     ├── tools
     │   ├── image_concate.py
     │   ├── image_count.py
     │   ├── masking.py
     │   ├── process_labels.py
-    │   └── tile_yolo.py
+    │   ├── manual_data_aug.py
+    │   └── tile_yolo.py  
     ├── yolosliced
     └── yolov3-master
       

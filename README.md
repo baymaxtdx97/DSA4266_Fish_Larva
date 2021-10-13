@@ -63,3 +63,17 @@ from calling YOLOV3 detect.py is for each sliced image.
 --image_label_prefix    Image Label e.g. 20210903_09054 
 --final_results_path    Directory path to store the txt file of all counts
 ```
+
+### manual_data_aug.py
+The purpose of this script is to get the data augmentation image and labels for the training dataset. This is created to increase the training
+dataset in hope to reduce overfitting. 
+
+```bash
+--random_number         Random number from 1-3
+--image_str             Image Label e.g. '20210729_131410_0_2.jpg'
+--label_str             Label name e.g. '20210729_131410_0_2.txt'
+--img_folder_name       Directory path to obtain images 
+--lab_folder_name       Directory path to obtain labels
+--image_folder_save     Directory path to store new images
+--lab_folder_save       Directory path to store new labels
+```

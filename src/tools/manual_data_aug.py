@@ -11,8 +11,8 @@ from PIL import Image, ImageOps
 def rotate_image_ninety(image_str, label_str, img_folder_name, lab_folder_name, image_folder_save, lab_folder_save):
     ''' rotates image by 90 degrees-clockwise
     Args:
-        image (str): string of image name
-        label (str): string of label name  
+        image_str (str): string of image name
+        label_str (str): string of label name  
         img_folder_name (str): location of original images
         lab_folder_name (str): location of original labels
         image_folder_save (str): location of images to save
@@ -20,7 +20,7 @@ def rotate_image_ninety(image_str, label_str, img_folder_name, lab_folder_name, 
     
     Returns:
         (tuple): tuple contraining:
-            out_image: rotated image by 90 degrees
+            out: rotated image by 90 degrees
             labels_copy: dataframe for rotated image by 90 degrees
     '''
     #read original image
@@ -61,13 +61,13 @@ def rotate_image_ninety(image_str, label_str, img_folder_name, lab_folder_name, 
     labels_copy[['y1', 'h']] = labels_copy[['y1', 'h']] / dim_x
     out_label = lab_folder_save+ label_str
     labels_copy.to_csv(out_label, header=None, index=None, sep=' ', mode='a')    
-    return out_image, labels_copy
+    return out, labels_copy
 
 def rotate_image_180(image_str, label_str, img_folder_name, lab_folder_name, image_folder_save, lab_folder_save):
     ''' rotates image by 180 degrees-clockwise
     Args:
-        image (str): string of image name
-        label (str): string of label name  
+        image_str (str): string of image name
+        label_str (str): string of label name  
         img_folder_name (str): location of original images
         lab_folder_name (str): location of original labels
         image_folder_save (str): location of images to save
@@ -116,13 +116,13 @@ def rotate_image_180(image_str, label_str, img_folder_name, lab_folder_name, ima
     labels_copy[['y1', 'h']] = labels_copy[['y1', 'h']] / dim_y
     out_label = lab_folder_save + label_str
     labels_copy.to_csv(out_label, header=None, index=None, sep=' ', mode='a')    
-    return out_image, labels_copy
+    return out, labels_copy
 
 def flip_image(image_str, label_str, img_folder_name, lab_folder_name, image_folder_save, lab_folder_save):
     ''' flips image to create mirror image
     Args:
-        image (str): string of image name
-        label (str): string of label name  
+        image_str (str): string of image name
+        label_str (str): string of label name  
         img_folder_name (str): location of original images
         lab_folder_name (str): location of original labels
         image_folder_save (str): location of images to save
@@ -171,7 +171,7 @@ def flip_image(image_str, label_str, img_folder_name, lab_folder_name, image_fol
     labels_copy[['y1', 'h']] = labels_copy[['y1', 'h']] / dim_y
     out_label = lab_folder_save + label_str
     labels_copy.to_csv(out_label, header=None, index=None, sep=' ', mode='a')  
-    return out_image, labels_copy
+    return out, labels_copy
 
 def overall_augmentation(random_number, image_str, label_str, \
                          img_folder_name, lab_folder_name, image_folder_save, lab_folder_save):
@@ -179,8 +179,8 @@ def overall_augmentation(random_number, image_str, label_str, \
     Args:
         random_number (int): int either 1, 2 or 3 to decide which augmentation
             technique to use
-        image (str): string of image name
-        label (str): string of label name  
+        image_str (str): string of image name
+        label_str (str): string of label name  
         img_folder_name (str): location of original images
         lab_folder_name (str): location of original labels
         image_folder_save (str): location of images to save

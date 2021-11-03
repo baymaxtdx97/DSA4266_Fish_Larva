@@ -35,7 +35,7 @@ def convert_labels(size: List[int], x1: int, y1:int , x2:int , y2:int) -> List[f
     h = ymax - ymin
     
     new_mid_x = (1/dh) - y
-    new_mid_y = mid_x
+    new_mid_y = x
     new_width_x = h
     new_width_y = w
     

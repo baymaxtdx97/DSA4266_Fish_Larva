@@ -55,37 +55,51 @@ with upload:
                 json_result_df = res.json().get('count_df')
                 dataframe = pd.read_json(json_result_df)
                 st.session_state.dataframe_count = dataframe
-                st.write("Prediction is completed. Please proceed to download your file and view output")
+                if res.json():
+                    st.write("Prediction is completed. Please proceed to download your file and view output")
+                else:
+                    st.write('There was an error. Please try again')
+        else:
+            st.write("Please upload an image in jpg format")
 
 with download:
     with st.expander("Download your file"):
         if st.button("Click here to continue"):
-            json_response = requests.get(
-                f"http://localhost:8005/download_results_json", 
-                params ={
-                    "input_filename": st.session_state.image_name_uploaded})
-            json_b64 = json_response.json().get('json_b64')
-            b64 = json.loads(json_b64)
-            bin_file = st.session_state.image_name_uploaded +'.json'
-            href = f'<a href="data:file/txt;base64,{b64}" download="{os.path.basename(bin_file)}"><input type="button" value="Download"></a>'
-            st.markdown(href, unsafe_allow_html= True)
+            if 'image_name_uploaded' in st.session_state:
+                json_response = requests.get(
+                    f"http://localhost:8005/download_results_json", 
+                    params ={
+                        "input_filename": st.session_state.image_name_uploaded})
+                json_b64 = json_response.json().get('json_b64')
+                b64 = json.loads(json_b64)
+                bin_file = st.session_state.image_name_uploaded +'.json'
+                href = f'<a href="data:file/txt;base64,{b64}" download="{os.path.basename(bin_file)}"><input type="button" value="Download"></a>'
+                st.markdown(href, unsafe_allow_html= True)
+            else:
+                st.write("Please upload an image in jpg format first")
 
 with display:
     with st.expander("Download your annotated image"):
         if st.button("Click here to proceed"):
-            json_response = requests.get(
-                f"http://localhost:8005/download_image_file")
-            json_b64 = json_response.json().get('json_b64')
-            b64 = json.loads(json_b64)
-            bin_file = st.session_state.image_name_uploaded +'.png'
-            href = f'<a href="data:file/txt;base64,{b64}" download="{os.path.basename(bin_file)}"><input type="button" value="Download"></a>'
-            st.markdown(href, unsafe_allow_html= True)
+            if 'image_name_uploaded' in st.session_state:
+                json_response = requests.get(
+                    f"http://localhost:8005/download_image_file")
+                json_b64 = json_response.json().get('json_b64')
+                b64 = json.loads(json_b64)
+                bin_file = st.session_state.image_name_uploaded +'.png'
+                href = f'<a href="data:file/txt;base64,{b64}" download="{os.path.basename(bin_file)}"><input type="button" value="Download"></a>'
+                st.markdown(href, unsafe_allow_html= True)
+            else:
+                st.write("Please upload an image in jpg format first")
 
 with count:
     with st.expander("View Counts for classes"):
         if st.button("View"):
-            output_df = st.session_state.dataframe_count
-            st.dataframe(output_df)
+            if 'dataframe_count' in st.session_state:
+                output_df = st.session_state.dataframe_count
+                st.dataframe(output_df)
+            else:
+                st.write("Please upload an image in jpg format first")
             
 
 

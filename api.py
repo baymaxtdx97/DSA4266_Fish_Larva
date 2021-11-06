@@ -5,11 +5,12 @@ import base64
 import os
 from datetime import datetime
 from fastapi import FastAPI, File, UploadFile
-from prediction import read_image, load_model, predict, expected_yolo_format
+from prediction import read_image, load_model, predict, table_summary
 
 app = FastAPI()
 model = load_model()
 
+@app.post('/predict')
 def predict_image(file: UploadFile= File(...)):
     # create path to store input file
     file_loc = './data/raw'
@@ -25,6 +26,8 @@ def predict_image(file: UploadFile= File(...)):
     predictions = predict(image, model)
     # create output json file 
     output_file = predictions.to_coco_annotations()
+    # create dataframe summary
+    table_count_df = table_summary(output_file)
 
     # create an output directory based on image name
     output_loc = './data/predicted'
@@ -33,9 +36,10 @@ def predict_image(file: UploadFile= File(...)):
     # export json file to folder
     with open(os.path.join(output_loc, input_filename + ".json"), 'w') as outfile:
         json.dump(output_file, outfile)
-    #with open('./data/predicted/output.json', 'w') as outfile:
-    #    json.dump(output_file, outfile)
-    return {"file_name": input_filename}
+    # export dataframe summary as csv file 
+    result = table_count_df.to_json()
+    return {"file_name": input_filename,
+            "count_df": result}
     #return FileResponse(os.path.join(output_loc, input_filename + ".json"), filename = input_filename + ".json")
 
 @app.get('/getimage')

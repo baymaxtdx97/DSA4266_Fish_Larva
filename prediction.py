@@ -139,17 +139,32 @@ def main(path_to_image:str, path_to_save_image:str, path_to_save_results:str, pa
     with open(path_to_save_results, 'w') as outfile:
         json.dump(object_prediction_list, outfile)
 
+from collections import Counter
+import pandas as pd
+def table_summary(predicted_label: List[Dict[str, Union[float, int, List[float]]]]) -> pd.DataFrame:
+    """
+    :param predicted_label: output json format of sahi inference
+    :return: returns dataframe containing summary count of each class label
+    """
+    counter_list = Counter([label['category_name'] for label in predicted_label])
+    table_summary = pd.DataFrame.from_records(counter_list.most_common(), columns=['Label','count'])
+    return table_summary
+
 #image = read_image('C:/Users/Arushi Gupta/Documents/Y4S1/DSA4266_Fish_Larva/data/raw/20210729_131410.jpg')
 #image = read_image("./data/raw/20210729_131410.jpg")
 image = "./data/raw/20210729_131410.jpg"
 model = load_model()
 output = predict(image, model)
-output_file_in = output.to_coco_annotations()
-output_file = expected_yolo_format("./data/raw/20210729_131410.jpg", output_file_in)
+output_file = output.to_coco_annotations()
+output_table = table_summary(output_file)
+
+#output_file = expected_yolo_format("./data/raw/20210729_131410.jpg", output_file_in)
 with open('./data/predicted/output.json', 'w') as outfile:
         json.dump(output_file, outfile)
 
 output.export_visuals(export_dir = './data/predicted')
+
+output_table.to_csv('./data/predicted/output.csv', index=False)
 
 #main('C:/Users/Arushi Gupta/Documents/Y4S1/DSA4266_Fish_Larva/data/raw/20210903_100734.jpg',
 #'C:/Users/Arushi Gupta/Documents/Y4S1/DSA4266_Fish_Larva/data/predicted',

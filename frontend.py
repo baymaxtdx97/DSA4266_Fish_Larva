@@ -1,6 +1,7 @@
 import json
 import os
 import base64
+import pandas as pd
 import requests
 import numpy as np
 import streamlit as st
@@ -39,6 +40,7 @@ st.title("Fish Larva Object Detection")
 upload = st.container()
 download = st.container()
 display = st.container()
+count = st.container()
 
 with upload: 
     st.header("Upload an image and generate predictions")
@@ -50,6 +52,9 @@ with upload:
             if st.button("Run Prediction"):
                 res = process(image, f"http://localhost:8005/predict")
                 st.session_state.image_name_uploaded = res.json().get('file_name')
+                json_result_df = res.json().get('count_df')
+                dataframe = pd.read_json(json_result_df)
+                st.session_state.dataframe_count = dataframe
                 st.write("Prediction is completed. Please proceed to download your file and view output")
 
 with download:
@@ -75,6 +80,13 @@ with display:
             bin_file = st.session_state.image_name_uploaded +'.png'
             href = f'<a href="data:file/txt;base64,{b64}" download="{os.path.basename(bin_file)}"><input type="button" value="Download"></a>'
             st.markdown(href, unsafe_allow_html= True)
+
+with count:
+    with st.expander("View Counts for classes"):
+        if st.button("View"):
+            output_df = st.session_state.dataframe_count
+            st.dataframe(output_df)
+            
 
 
 

@@ -17,9 +17,9 @@ def get_binary_file_downloader_html(bin_file, file_label='File'):
     href = f'<a href="data:file/txt;base64,{bin_str}" download="{os.path.basename(bin_file)}"><input type="button" value="Download"></a>'
     return href
 
-#def load_image(image_file):
-#	img = Image.open(image_file)
-#	return img
+def load_image(image_file):
+	img = Image.open(image_file)
+	return img
 
 def process(file, server_url:str):
     media = MultipartEncoder(
@@ -49,6 +49,7 @@ with upload:
             "Choose an image", type =[
                 'jpg', 'jpeg'])
         if image is not None:
+            st.image(image)
             if st.button("Run Prediction"):
                 res = process(image, f"http://localhost:8005/predict")
                 st.session_state.image_name_uploaded = res.json().get('file_name')
@@ -82,6 +83,8 @@ with display:
     with st.expander("Download your annotated image"):
         if st.button("Click here to proceed"):
             if 'image_name_uploaded' in st.session_state:
+                annotated_img = load_image('./data/predicted/prediction_visual.png')
+                st.image(annotated_img)
                 json_response = requests.get(
                     f"http://localhost:8005/download_image_file")
                 json_b64 = json_response.json().get('json_b64')

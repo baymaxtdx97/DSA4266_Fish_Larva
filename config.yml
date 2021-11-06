@@ -1,0 +1,5 @@
+data:
+  raw_data_location: 'C:/Users/Arushi Gupta/Documents/Y4S1/DSA4266_Fish_Larva/data/raw/'
+  predicted_data_location: 'C:/Users/Arushi Gupta/Documents/Y4S1/DSA4266_Fish_Larva/data/predicted'
+models:
+  yolo_location: 'C:/Users/Arushi Gupta/Documents/Y4S1/DSA4266_Fish_Larva/models/best.pt'

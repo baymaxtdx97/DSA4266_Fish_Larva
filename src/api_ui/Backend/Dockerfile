@@ -10,11 +10,8 @@ RUN pip3 install -r requirements.txt
 RUN apt-get update
 RUN apt-get install libsm6 libxrender1 libfontconfig1 libice6 libgl1 -y
 
-COPY ./src/api_ui ./
+COPY ./ ./
 
-EXPOSE 8501
+EXPOSE 8005
 
-
-RUN chmod u+x ./script.sh
-
-ENTRYPOINT ["./script.sh"]
+ENTRYPOINT ["python3", "api.py"]

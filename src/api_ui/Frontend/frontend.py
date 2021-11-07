@@ -83,8 +83,8 @@ with display:
     with st.expander("Download your annotated image"):
         if st.button("Click here to proceed"):
             if 'image_name_uploaded' in st.session_state:
-                annotated_img = load_image('./data/predicted/prediction_visual.png')
-                st.image(annotated_img)
+                # annotated_img = load_image('../Backend/data/predicted/prediction_visual.png')
+                # st.image(annotated_img)
                 json_response = requests.get(
                     f"http://localhost:8005/download_image_file")
                 json_b64 = json_response.json().get('json_b64')

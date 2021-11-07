@@ -1,0 +1,19 @@
+version: "3.8"
+
+services:
+  frontend:
+    image: fish-frontend
+    build:
+      context: ./src/api_ui/Frontend
+    ports:
+      - 8501:8501
+    depends_on:
+      - backend
+
+  backend:
+    image: fish-backend
+    build:
+      context: ./src/api_ui/Backend
+    ports:
+      - 8005:8005
+

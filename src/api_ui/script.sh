@@ -2,7 +2,7 @@
 
 echo 'hello world'
 
-python3 api.py &
+python3 api.py # &
 # wait &
 
-streamlit run frontend.py 
+#streamlit run frontend.py 

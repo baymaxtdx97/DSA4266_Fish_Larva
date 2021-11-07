@@ -70,7 +70,7 @@ with download:
                 json_response = requests.get(
                     f"http://localhost:8005/download_results_json", 
                     params ={
-                        "input_filename": st.session_state.image_name_uploaded})
+                        "input_filename": st.session_state.image_name_uploaded}, timeout=8000)
                 json_b64 = json_response.json().get('json_b64')
                 b64 = json.loads(json_b64)
                 bin_file = st.session_state.image_name_uploaded +'.json'
@@ -86,7 +86,7 @@ with display:
                 # annotated_img = load_image('../Backend/data/predicted/prediction_visual.png')
                 # st.image(annotated_img)
                 json_response = requests.get(
-                    f"http://localhost:8005/download_image_file")
+                    f"http://localhost:8005/download_image_file", timeout=8000)
                 json_b64 = json_response.json().get('json_b64')
                 b64 = json.loads(json_b64)
                 bin_file = st.session_state.image_name_uploaded +'.png'

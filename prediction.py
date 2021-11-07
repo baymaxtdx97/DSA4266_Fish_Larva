@@ -1,17 +1,23 @@
+import cv2
+import pandas as pd
+
+
 from PIL import Image
 from io import BytesIO
 from sahi.model import Yolov5DetectionModel
 from sahi.predict import get_sliced_prediction
 from typing import Dict, List, Union
+
 import base64
 import json
-import cv2
+from collections import Counter
 
 def base_64_img(img_path: str) -> str:
     with open(img_path, "rb") as img_file:
         my_string = base64.b64encode(img_file.read())
+        base64_string = my_string.decode('utf-8')
 
-    return my_string
+    return base64_string
 
 def get_img_shape(img_path: str) -> List[int]:
     img = cv2.imread(img_path)
@@ -139,8 +145,7 @@ def main(path_to_image:str, path_to_save_image:str, path_to_save_results:str, pa
     with open(path_to_save_results, 'w') as outfile:
         json.dump(object_prediction_list, outfile)
 
-from collections import Counter
-import pandas as pd
+
 def table_summary(predicted_label: List[Dict[str, Union[float, int, List[float]]]]) -> pd.DataFrame:
     """
     :param predicted_label: output json format of sahi inference

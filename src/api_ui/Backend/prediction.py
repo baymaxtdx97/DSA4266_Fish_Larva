@@ -77,10 +77,6 @@ def expected_yolo_format(img_path: str, coco_annotations: List[Dict[str,
     return {'filename': img_name, 'image_base64': base64_img, 'predictions': prediction_list}
 
 
-def read_image(image_encoded):
-    pil_image = Image.open(image_encoded)
-    return pil_image
-
 def load_model():
     path_to_yolo = 'best.pt'
     detection_model = Yolov5DetectionModel(
@@ -100,18 +96,6 @@ def predict(image, model_used):
     overlap_width_ratio = 0.2
     )
     return result
-
-def get_file(image: Image.Image, model_used):
-    result = get_sliced_prediction(
-    image,
-    model_used,
-    slice_height = 640,
-    slice_width = 640,
-    overlap_height_ratio = 0.2,
-    overlap_width_ratio = 0.2
-    )
-    return result.to_coco_annotations()
-
 
 def main(path_to_image:str, path_to_save_image:str, path_to_save_results:str, path_to_yolo: str):
     """
@@ -156,14 +140,16 @@ def table_summary(predicted_label: List[Dict[str, Union[float, int, List[float]]
 
 # image = read_image('C:/Users/Arushi Gupta/Documents/Y4S1/DSA4266_Fish_Larva/data/raw/20210729_131410.jpg')
 # image = read_image("./data/raw/20210729_131410.jpg")
-# image = "./data/raw/20210729_131410.jpg"
+# image = "../data/raw/20210729_131410.jpg"
 # model = load_model()
 # output = predict(image, model)
-# output_file = output.to_coco_annotations()
+# output_file_in = output.to_coco_annotations()
+# output_file = expected_yolo_format(image, output_file_in)
+
 # output_table = table_summary(output_file)
 
 # #output_file = expected_yolo_format("./data/raw/20210729_131410.jpg", output_file_in)
-# with open('./data/predicted/output.json', 'w') as outfile:
+# with open('../data/predicted/output.json', 'w') as outfile:
 #         json.dump(output_file, outfile)
 
 # output.export_visuals(export_dir = './data/predicted')

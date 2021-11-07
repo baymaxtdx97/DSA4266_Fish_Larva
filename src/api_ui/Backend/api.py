@@ -5,7 +5,7 @@ import base64
 import os
 from datetime import datetime
 from fastapi import FastAPI, File, UploadFile
-from prediction import read_image, load_model, predict, table_summary
+from prediction import load_model, predict, expected_yolo_format, table_summary
 
 
 
@@ -22,14 +22,15 @@ def predict_image(file: UploadFile= File(...)):
     with open((os.path.join(file_loc, file.filename).replace("\\", "/")), "wb+") as fileobject:
         fileobject.write(file.file.read())
     # read image stored in input path 
-    image = read_image(os.path.join(file_loc, file.filename).replace("\\", "/"))
-
+    #image = read_image(os.path.join(file_loc, file.filename).replace("\\", "/"))
+    image = os.path.join(file_loc, file.filename).replace("\\", "/")
     # create prediction using image and model
     predictions = predict(image, model)
     # create output json file 
-    output_file = predictions.to_coco_annotations()
+    output_file_in = predictions.to_coco_annotations()
+    output_file = expected_yolo_format(image, output_file_in)
     # create dataframe summary
-    table_count_df = table_summary(output_file)
+    table_count_df = table_summary(output_file_in)
 
     # create an output directory based on image name
     output_loc = '../data/predicted'

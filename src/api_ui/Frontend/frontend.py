@@ -10,13 +10,6 @@ from streamlit.elements import media
 from requests_toolbelt import MultipartEncoder
 
 
-def get_binary_file_downloader_html(bin_file, file_label='File'):
-    with open(bin_file, 'rb') as f:
-        data = f.read()
-    bin_str = base64.b64encode(data).decode()
-    href = f'<a href="data:file/txt;base64,{bin_str}" download="{os.path.basename(bin_file)}"><input type="button" value="Download"></a>'
-    return href
-
 def load_image(image_file):
 	img = Image.open(image_file)
 	return img

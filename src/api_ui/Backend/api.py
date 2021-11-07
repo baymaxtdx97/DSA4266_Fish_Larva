@@ -22,7 +22,6 @@ def predict_image(file: UploadFile= File(...)):
     with open((os.path.join(file_loc, file.filename).replace("\\", "/")), "wb+") as fileobject:
         fileobject.write(file.file.read())
     # read image stored in input path 
-    #image = read_image(os.path.join(file_loc, file.filename).replace("\\", "/"))
     image = os.path.join(file_loc, file.filename).replace("\\", "/")
     # create prediction using image and model
     predictions = predict(image, model)
@@ -43,17 +42,6 @@ def predict_image(file: UploadFile= File(...)):
     result = table_count_df.to_json()
     return {"file_name": input_filename,
             "count_df": result}
-    #return FileResponse(os.path.join(output_loc, input_filename + ".json"), filename = input_filename + ".json")
-
-#@app.get('/getimage')
-#def get_annotated_image():
-#    return FileResponse(os.path.join('../data/predicted', 'prediction_visual.png'))
-
-#@app.get('/getjson')
-#def get_json(input_filename: str):
-#    #return FileResponse('./data/predicted/output.json', filename = 'output.json')
-#    first_input = os.path.join('./data/predicted', input_filename + ".json").replace('\\', "/")
-#    return FileResponse(first_input, filename = input_filename + ".json")
 
 @app.get('/download_image_file')
 def download_results_json():

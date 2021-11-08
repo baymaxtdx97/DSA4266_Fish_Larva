@@ -12,6 +12,7 @@ RUN apt-get install libsm6 libxrender1 libfontconfig1 libice6 libgl1 -y
 
 COPY ./ ./
 
+
 EXPOSE 8005
 
 ENTRYPOINT ["python3", "api.py"]

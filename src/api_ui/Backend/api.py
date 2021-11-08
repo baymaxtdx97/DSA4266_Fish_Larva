@@ -15,7 +15,7 @@ model = load_model()
 @app.post('/predict')
 def predict_image(file: UploadFile= File(...)):
     # create path to store input file
-    file_loc = '../data/raw'
+    file_loc = './data/raw'
     # get file name without extension
     input_filename = file.filename[:-4]
     # store input file into that path
@@ -32,7 +32,7 @@ def predict_image(file: UploadFile= File(...)):
     table_count_df = table_summary(output_file_in)
 
     # create an output directory based on image name
-    output_loc = '../data/predicted'
+    output_loc = './data/predicted'
     # export prediction image to folder
     predictions.export_visuals(output_loc)
     # export json file to folder
@@ -45,7 +45,7 @@ def predict_image(file: UploadFile= File(...)):
 
 @app.get('/download_image_file')
 def download_results_json():
-    first_input = '../data/predicted/prediction_visual.png'
+    first_input = './data/predicted/prediction_visual.png'
     with open(first_input, 'rb') as f:
         data = f.read()
         b64 = base64.b64encode(data).decode()
@@ -56,7 +56,7 @@ def download_results_json():
 
 @app.get('/download_results_json')
 def download_image_file(input_filename: str):
-    first_input = os.path.join('../data/predicted', input_filename + ".json").replace('\\', "/")
+    first_input = os.path.join('./data/predicted', input_filename + ".json").replace('\\', "/")
     with open(first_input, 'rb') as f:
         data = f.read()
         b64 = base64.b64encode(data).decode()

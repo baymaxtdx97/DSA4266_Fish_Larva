@@ -1,42 +1,83 @@
 # DSA4266_Fish_Larva
 This project aims to help do small objection detection. The current model implemented in this repository is YOLOV3.
 
-## Project Structure
+# Project Structure
 ```bash
- src
+├── README.md
+├── docker-compose.yml
+├── sahi-yolov5.py
+└── src
+    ├── api_ui
+    │   ├── Backend
+    │   │   ├── Dockerfile
+    │   │   ├── api.py
+    │   │   ├── best.pt
+    │   │   ├── prediction.py
+    │   │   └── requirements.txt
+    │   ├── Frontend
+    │   │   ├── Dockerfile
+    │   │   ├── frontend.py
+    │   │   └── requirements.txt
+    │   └── data
+    │       ├── predict
+    │       ├── predicted
+    │       └── raw
     ├── data
-    │   ├── After_aug_V1
-    │   ├── After_split_V2
-    │   ├── Full_image_V1
-    │   └── classes.txt
     ├── image_tools.sh
+    ├── requirements.txt
     ├── tools
     │   ├── image_concate.py
     │   ├── image_count.py
-    │   ├── masking_unwanted.py
     │   ├── manual_data_aug.py
-    │   └── tile_yolo.py  
+    │   ├── masking_unwanted.py
+    │   └── tile_yolo.py
     ├── yolosliced
+    │   ├── test.txt
+    │   └── train.txt
     └── yolov3-master
       
 ```
 
-## Getting Started
+# Getting Started
 In this repository, we will be explaining the scripts that we have wrote to aid us in image processing/data augmentation. The following guide will help to explain on how to 
-utilise these scripts. All scripts are placed under the folder tools. 
+utilise these scripts. Scripts placed under tools are scripts used for inference when using YOLOV3. For our web app using our final model, the backend code can be found in Backend Folder while the frontend code can be found under Frontend Folder
+
+# Backend
+
+## Dockerfile
+To initialise the image. To create the image and create the container, refer to the following.
+
+```bash
+docker build -t <image_name>:latest .
+
+docker run -p 8005:8005 <image_name>
+```
+
+## best.pt
+This is just the model used for YOLOV5. 
+
+## prediction.py
+Contains all the helper functions for inference. It is built solely around Sahi and YoloV5. 
+
+## api.py
 
 
-## image_tools.sh
+# Frontend
+
+
+# tools
+
+## image_tools.sh (YOLOV3)
 We created a pipeline that helps in inference of how the model predicts bounding boxes on the images. The variables will have to be edited to fit the environment that it is
 running on. It utilises functions described below. 
 
-### tile_yolo.py
+### tile_yolo.py (YOLOV3)
 This script has been created by Rostyslav Neskorozhenyi and the original repository can be found [here](https://github.com/slanj/yolo-tiling).
 Purpose of this script is to help us slice our images into a desired resolution.
 For our project, We ran the script with the following configurations. When running the script for train images, there has to be an additional script
 classes.names that contains the classes. 
 
-```bash
+```bash 
 # This is if you are trying to slice test images with no txt files for bounding boxes
 -source         Directory path to data. Needs to contain both images and labels
 -falsefolder    Directory path to store images where there are no bounding boxes
@@ -48,7 +89,7 @@ classes.names that contains the classes.
 ```
 
 
-### image_concate.py
+### image_concate.py (YOLOV3)
 The purpose of this script is to help paste back images. This is made specifically for test images. 
 This scripts works in coordination with the output from tile_yolo.py. It will not be able to function properly otherwise.
 
@@ -58,7 +99,7 @@ This scripts works in coordination with the output from tile_yolo.py. It will no
 --final_results_path    Directory path to store the pasted images
 ```
 
-### image_count.py
+### image_count.py (YOLOV3)
 The purpose of this script is to get the overall counts of each class. This is created because images are sliced and the counts received from calling YOLOV3 detect.py is for each sliced image. 
 
 ```bash
@@ -67,7 +108,7 @@ The purpose of this script is to get the overall counts of each class. This is c
 --final_results_path    Directory path to store the txt file of all counts
 ```
 
-### manual_data_aug.py
+### manual_data_aug.py (YOLOV3)
 The purpose of this script is to get the data augmentation image and labels for the training dataset. This is created to increase the training dataset in hopes to reduce overfitting. 
 
 ```bash
@@ -80,7 +121,7 @@ The purpose of this script is to get the data augmentation image and labels for 
 --lab_folder_save       Directory path to store new labels
 ```
 
-### masking_unwanted.py
+### masking_unwanted.py (YOLOV3)
 The purpose of this script is to get remove the sections of the image which the group labelled as 4 to be masked out. This is created so that these areas do not interfere with the training of the dataset.
 
 ```bash

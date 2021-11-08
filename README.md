@@ -64,6 +64,9 @@ Contains all the helper functions for inference. It is built solely around Sahi 
 
 # Frontend
 
+```bash
+streamlit run frontend.py
+```
 
 # tools
 

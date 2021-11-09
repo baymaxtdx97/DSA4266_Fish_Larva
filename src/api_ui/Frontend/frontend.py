@@ -37,7 +37,7 @@ count = st.container()
 
 with upload: 
     st.header("Upload an image and generate predictions")
-    with st.expander("Upload an image in jpeg format"):
+    with st.expander("Upload an image in jpg format"):
         image = st.file_uploader(
             "Choose an image", type =[
                 'jpg'])

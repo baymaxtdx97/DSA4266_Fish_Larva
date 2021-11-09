@@ -44,7 +44,7 @@ with upload:
         if image is not None:
             st.image(image)
             if st.button("Run Prediction"):
-                res = process(image, f"http://localhost:8005/predict")
+                res = process(image, f"http://backend:8005/predict")
                 st.session_state.image_name_uploaded = res.json().get('file_name')
                 json_result_df = res.json().get('count_df')
                 dataframe = pd.read_json(json_result_df)
@@ -61,7 +61,7 @@ with download:
         if st.button("Click here to continue"):
             if 'image_name_uploaded' in st.session_state:
                 json_response = requests.get(
-                    f"http://localhost:8005/download_results_json", 
+                    f"http://backend:8005/download_results_json", 
                     params ={
                         "input_filename": st.session_state.image_name_uploaded}, timeout=8000)
                 json_b64 = json_response.json().get('json_b64')
@@ -79,7 +79,7 @@ with display:
                 #annotated_img = load_image('../data/predicted/prediction_visual.png')
                 #st.image(annotated_img)
                 json_response = requests.get(
-                    f"http://localhost:8005/download_image_file", timeout=8000)
+                    f"http://backend:8005/download_image_file", timeout=8000)
                 json_b64 = json_response.json().get('json_b64')
                 b64 = json.loads(json_b64)
                 bin_file = st.session_state.image_name_uploaded +'.png'

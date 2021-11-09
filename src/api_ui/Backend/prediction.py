@@ -60,6 +60,8 @@ def convert_labels(size: List[int], x1: int, y1:int , x2:int , y2:int) -> List[f
     # if image is in portrait mood
     # do a roation
     if size[0] > size[1]:
+        dw = 1./size[0]
+        dh = 1./size[1]
         new_mid_x = (1/dh) - y
         new_mid_y = x
         new_width_x = h

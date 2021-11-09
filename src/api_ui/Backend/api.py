@@ -26,7 +26,7 @@ def predict_image(file: UploadFile= File(...)):
     # create prediction using image and model
     predictions = predict(image, model)
     # create output json file 
-    output_file_in = predictions.to_coco_annotations()
+    output_file_in = predictions.to_coco_predictions()
     output_file = expected_yolo_format(image, output_file_in)
     # create dataframe summary
     table_count_df = table_summary(output_file_in)

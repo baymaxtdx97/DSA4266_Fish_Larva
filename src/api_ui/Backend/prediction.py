@@ -36,9 +36,9 @@ def convert_labels(size: List[int], x1: int, y1:int , x2:int , y2:int) -> List[f
     This only works with sahi because rotation happens in sahi and thus this script is configured to deal with the rotation as well.
     :param size: size of image
     :param x1: coordinate of bounding box in coco format
-    :param x1: coordinate of bounding box in coco format
-    :param x1: coordinate of bounding box in coco format
-    :param x1: coordinate of bounding box in coco format
+    :param x2: coordinate of bounding box in coco format
+    :param y1: coordinate of bounding box in coco format
+    :param y2: coordinate of bounding box in coco format
     :return: list of coordinates in yolo format
     """
     def sorting(l1, l2):

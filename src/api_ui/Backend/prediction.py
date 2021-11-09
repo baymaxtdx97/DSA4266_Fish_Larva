@@ -73,10 +73,16 @@ def convert_labels(size: List[int], x1: int, y1:int , x2:int , y2:int) -> List[f
         y = new_mid_y*dw
         h = new_width_y*dw
     else:
-        x = x*dw
-        w = w*dw
-        y = y*dh
-        h = h*dh
+        new_mid_x = (1/dw) - x
+        new_mid_y = (1/dh) - y
+        new_width_x = w
+        new_width_y = h
+
+        #normalize
+        x = new_mid_x*dw
+        w = new_width_x*dw
+        y = new_mid_y*dh
+        h = new_width_y*dh
     
     return [x, y, w, h]
 
@@ -147,4 +153,4 @@ def table_summary(predicted_label: List[Dict[str, Union[float, int, List[float]]
     table_summary = pd.DataFrame.from_records(counter_list.most_common(), columns=['Label','count'])
     return table_summary
 
-get_img_shape('./data/raw/20210903_095054.jpg')
+#get_img_shape('./data/raw/20210903_095054.jpg')

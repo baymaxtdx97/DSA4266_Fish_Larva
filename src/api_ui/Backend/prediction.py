@@ -28,6 +28,7 @@ def get_img_shape(img_path: str) -> List[int]:
     :return: shape of image
     """
     img = cv2.imread(img_path)
+    print(img.shape)
     return img.shape
 
 def convert_labels(size: List[int], x1: int, y1:int , x2:int , y2:int) -> List[float]:
@@ -55,18 +56,25 @@ def convert_labels(size: List[int], x1: int, y1:int , x2:int , y2:int) -> List[f
     y = (ymin + ymax)/2.0
     w = xmax - xmin
     h = ymax - ymin
+
+    # if image is in portrait mood
+    # do a roation
+    if size[0] > size[1]:
+        new_mid_x = (1/dh) - y
+        new_mid_y = x
+        new_width_x = h
+        new_width_y = w
     
-    new_mid_x = (1/dh) - y
-    new_mid_y = x
-    new_width_x = h
-    new_width_y = w
-    
-    # normalize
-    x = new_mid_x*dh
-    w = new_width_x*dh
-    y = new_mid_y*dw
-    h = new_width_y*dw
-    
+        # normalize
+        x = new_mid_x*dh
+        w = new_width_x*dh
+        y = new_mid_y*dw
+        h = new_width_y*dw
+    else:
+        x = x*dw
+        w = w*dw
+        y = y*dh
+        h = h*dh
     
     return [x, y, w, h]
 
@@ -136,3 +144,5 @@ def table_summary(predicted_label: List[Dict[str, Union[float, int, List[float]]
     counter_list = Counter([label['category_name'] for label in predicted_label])
     table_summary = pd.DataFrame.from_records(counter_list.most_common(), columns=['Label','count'])
     return table_summary
+
+get_img_shape('./data/raw/20210903_095054.jpg')

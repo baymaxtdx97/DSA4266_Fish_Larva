@@ -64,10 +64,10 @@ Contains all the packages required to run the API and UI
 
 ## api.py
 The api is created using a package in Python called FastAPI. It supports 3 functions - predict_image, download_results_json, download_image_file.
-Python 3.5 or later is required for deployment. Initialise an Anaconda Environment with this Python version.
+Python 3.7 or later is required for deployment. Initialise an Anaconda Environment with this Python version.
 
 ```bash
-conda create --name fish-larva-demo python=3.5
+conda create --name fish-larva-demo python=3.7
 conda activate fish-larva-demo
 ```
 

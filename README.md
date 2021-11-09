@@ -1,5 +1,5 @@
 # DSA4266_Fish_Larva
-This project aims to help do small objection detection. The current model implemented in this repository is YOLOV3.
+This project aims to help do small objection detection. The current model implemented in this repository is YOLOV3 and YOLOV5.
 
 # Project Structure
 ```bash
@@ -59,13 +59,59 @@ This is just the model used for YOLOV5.
 ## prediction.py
 Contains all the helper functions for inference. It is built solely around Sahi and YoloV5. 
 
-## api.py
+## requirements.txt
+Contains all the packages required to run the API and UI
 
+## api.py
+The api is created using a package in Python called FastAPI. It supports 3 functions - predict_image, download_results_json, download_image_file.
+Python 3.5 or later is required for deployment. Initialise an Anaconda Environment with this Python version.
+
+```bash
+conda create --name fish-larva-demo python=3.5
+conda activate fish-larva-demo
+```
+
+Install the required pacakges
+```bash
+pip install -r requirements.txt
+```
+
+To deploy the backend API, change to the following directory
+```bash
+cd src
+cd api_ui
+cd Backend
+```
+
+Run the application:
+```bash
+python api.py
+```
+To view API documentation, visit this link in your browser
+```bash
+http://localhost:8005/docs
+```
 
 # Frontend
 
+## requirements.txt
+Contains all the packages required to run the API and UI
+
+## frontend.py
+The frontend is created using a package is Python called Streamlit. To deploy the interface, let the backend running and open a new terminal. Change to the following directory
+```bash
+cd  ..
+cd Frontend
+```
+
+Run the application
 ```bash
 streamlit run frontend.py
+```
+
+To view the interface, visit the link in your terminal or the following link
+```bash
+http://localhost:8501/
 ```
 
 # tools

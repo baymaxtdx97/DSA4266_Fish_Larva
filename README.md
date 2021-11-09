@@ -22,7 +22,6 @@ This project aims to help do small objection detection. The current model implem
     │       ├── predict
     │       ├── predicted
     │       └── raw
-    ├── data
     ├── image_tools.sh
     ├── requirements.txt
     ├── tools
@@ -41,6 +40,13 @@ This project aims to help do small objection detection. The current model implem
 # Getting Started
 In this repository, we will be explaining the scripts that we have wrote to aid us in image processing/data augmentation. The following guide will help to explain on how to 
 utilise these scripts. Scripts placed under tools are scripts used for inference when using YOLOV3. For our web app using our final model, the backend code can be found in Backend Folder while the frontend code can be found under Frontend Folder
+
+# docker-compose.yml
+The purpose is to create a isolated environment to run both frontend and backend together. To build the images and run the container. Simply run the command below
+
+```bash
+docker compose up
+```
 
 # Backend
 
@@ -64,7 +70,7 @@ Contains all the packages required to run the API and UI
 
 ## api.py
 The api is created using a package in Python called FastAPI. It supports 3 functions - predict_image, download_results_json, download_image_file.
-Python 3.7 or later is required for deployment. Initialise an Anaconda Environment with this Python version.
+Python 3.7 or later is required for deployment. Initialise an Anaconda Environment with this Python version. Run the following commands if you wish to run it locally.
 
 ```bash
 conda create --name fish-larva-demo python=3.7
@@ -120,7 +126,7 @@ http://localhost:8501/
 We created a pipeline that helps in inference of how the model predicts bounding boxes on the images. The variables will have to be edited to fit the environment that it is
 running on. It utilises functions described below. 
 
-### tile_yolo.py (YOLOV3)
+## tile_yolo.py (YOLOV3)
 This script has been created by Rostyslav Neskorozhenyi and the original repository can be found [here](https://github.com/slanj/yolo-tiling).
 Purpose of this script is to help us slice our images into a desired resolution.
 For our project, We ran the script with the following configurations. When running the script for train images, there has to be an additional script
@@ -138,7 +144,7 @@ classes.names that contains the classes.
 ```
 
 
-### image_concate.py (YOLOV3)
+## image_concate.py (YOLOV3)
 The purpose of this script is to help paste back images. This is made specifically for test images. 
 This scripts works in coordination with the output from tile_yolo.py. It will not be able to function properly otherwise.
 
@@ -148,7 +154,7 @@ This scripts works in coordination with the output from tile_yolo.py. It will no
 --final_results_path    Directory path to store the pasted images
 ```
 
-### image_count.py (YOLOV3)
+## image_count.py (YOLOV3)
 The purpose of this script is to get the overall counts of each class. This is created because images are sliced and the counts received from calling YOLOV3 detect.py is for each sliced image. 
 
 ```bash
@@ -157,7 +163,7 @@ The purpose of this script is to get the overall counts of each class. This is c
 --final_results_path    Directory path to store the txt file of all counts
 ```
 
-### manual_data_aug.py (YOLOV3)
+## manual_data_aug.py (YOLOV3)
 The purpose of this script is to get the data augmentation image and labels for the training dataset. This is created to increase the training dataset in hopes to reduce overfitting. 
 
 ```bash
@@ -170,7 +176,7 @@ The purpose of this script is to get the data augmentation image and labels for 
 --lab_folder_save       Directory path to store new labels
 ```
 
-### masking_unwanted.py (YOLOV3)
+## masking_unwanted.py (YOLOV3)
 The purpose of this script is to get remove the sections of the image which the group labelled as 4 to be masked out. This is created so that these areas do not interfere with the training of the dataset.
 
 ```bash

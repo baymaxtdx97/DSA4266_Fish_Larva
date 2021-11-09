@@ -1,9 +1,0 @@
-# train and val data 
-train: Final_Data/train.txt  
-val: Final_Data/val.txt  
-
-# number of classes
-nc: 4
-
-# class names
-names: ['Fertilised egg', 'Unfertilised egg', 'Fish larvae', 'Unidentifiable']

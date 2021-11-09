@@ -40,7 +40,7 @@ with upload:
     with st.expander("Upload an image in jpeg format"):
         image = st.file_uploader(
             "Choose an image", type =[
-                'jpg', 'jpeg'])
+                'jpg'])
         if image is not None:
             st.image(image)
             if st.button("Run Prediction"):

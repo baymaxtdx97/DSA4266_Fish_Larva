@@ -119,7 +119,7 @@ def expected_yolo_format(img_path: str, coco_annotations: List[Dict[str,
 
 def load_model():
     """
-    loeads the yolov5 model in sahi format
+    loads the yolov5 model in sahi format
     """
     path_to_yolo = 'best.pt'
     detection_model = Yolov5DetectionModel(
@@ -132,7 +132,7 @@ def load_model():
 def predict(image: str, model_used):
     """
     :param image: path of image
-    :param model: model used for inference, only works with sahi yolov5 or other mmdetection model in sahi
+    :param model_used: model used for inference, only works with sahi yolov5 or other mmdetection model in sahi
     :return: inference results
     """
     result = get_sliced_prediction(

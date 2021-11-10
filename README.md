@@ -5,7 +5,7 @@ This project aims to help do small objection detection. The current model implem
 ```bash
 ├── README.md
 ├── docker-compose.yml
-├── sahi-yolov5.py
+├── API_documentation.pdf
 └── src
     ├── api_ui
     │   ├── Backend

@@ -57,8 +57,7 @@ def convert_labels(size: List[int], x1: int, y1:int , x2:int , y2:int) -> List[f
     w = xmax - xmin
     h = ymax - ymin
 
-    # if image is in portrait mood
-    # do a roation
+    # if image is in portrait mode, rotate once
     if size[0] > size[1]:
         dw = 1./size[0]
         dh = 1./size[1]
@@ -72,6 +71,8 @@ def convert_labels(size: List[int], x1: int, y1:int , x2:int , y2:int) -> List[f
         w = new_width_x*dh
         y = new_mid_y*dw
         h = new_width_y*dw
+
+    # Rotate twice for landscape mode
     else:
         new_mid_x = (1/dw) - x
         new_mid_y = (1/dh) - y
@@ -152,5 +153,3 @@ def table_summary(predicted_label: List[Dict[str, Union[float, int, List[float]]
     counter_list = Counter([label['category_name'] for label in predicted_label])
     table_summary = pd.DataFrame.from_records(counter_list.most_common(), columns=['Label','count'])
     return table_summary
-
-#get_img_shape('./data/raw/20210903_095054.jpg')
